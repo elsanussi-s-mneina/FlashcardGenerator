@@ -28,6 +28,7 @@ FRONT_BACK_SEPARATOR = '$%$%'
 BETWEEN_CARD_SEPARATOR = '*&*&'
 NEW_LINE_SYMBOL = ' %NEW_LINE% '
 
+
 def convert_single_line_text_to_flashcards(text: str) -> List[Tuple[str, str]]:
     original_text = text
     text = text.replace('\n', NEW_LINE_SYMBOL)
@@ -36,13 +37,13 @@ def convert_single_line_text_to_flashcards(text: str) -> List[Tuple[str, str]]:
     results = []
     for word in words:
         if not words[i] == NEW_LINE_SYMBOL.strip():
-            front_side, back_side =  quiz_on_nth_word(i, words)
-        results.append((front_side, back_side))
+            front_side, back_side = quiz_on_nth_word(i, words)
+            results.append((front_side, back_side))
+            print(front_side, end='')
+            print(FRONT_BACK_SEPARATOR, end='')
+            print(back_side, end='')
+            print(BETWEEN_CARD_SEPARATOR, end='')
         i += 1
-        print(front_side, end='')
-        print(FRONT_BACK_SEPARATOR, end='')
-        print(back_side, end='')
-        print(BETWEEN_CARD_SEPARATOR, end='')
     return results
 
 
@@ -50,22 +51,29 @@ def quiz_on_nth_word(n: int, words: List[str]) -> Tuple[str, str]:
     i = 0
     front_side = ''
     back_side = 'BLANK'
+    previous_word = ''
     for word in words:
-        if word == NEW_LINE_SYMBOL.strip():
+        if is_new_line_symbol(word):
             front_side += '\n'
-        elif i == n - 1:
+        elif i == n - 1 or (i == n - 2 and next_word_is_new_line(words, i)):
             front_side += word + ' '
         elif i == n:
             front_side += FOCUS_BLANK + punctuation_at_end_of_word(word) + ' '
             back_side = word
         else:
             front_side += NON_FOCUS_BLANK + punctuation_at_end_of_word(word) + ' '
-
         i += 1
+        previous_word = word
     return front_side, back_side
 
 
-def punctuation_at_end_of_word(word: str):
+def next_word_is_new_line(words: List[str], index: int) -> bool:
+    return is_new_line_symbol(words[index + 1])
+
+def is_new_line_symbol(token: str) -> bool:
+    return token == NEW_LINE_SYMBOL.strip()
+
+def punctuation_at_end_of_word(word: str) -> str:
     if word.endswith('.') or word.endswith(',') or word.endswith('!') or word.endswith('?'):
         return word[-1]
     else:
