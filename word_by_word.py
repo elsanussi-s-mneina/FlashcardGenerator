@@ -1,7 +1,6 @@
 from typing import List, Tuple
 
 from card_separation_tokens import FRONT_BACK_SEPARATOR, BETWEEN_CARD_SEPARATOR
-from main import demo
 
 
 def convert_single_line_text_to_word_by_word_flashcards(text: str) -> List[Tuple[str, str]]:
@@ -66,5 +65,3 @@ def is_new_line_symbol(token: str) -> bool:
 FOCUS_BLANK = '_?_'
 NON_FOCUS_BLANK = '___'
 NEW_LINE_SYMBOL = ' %NEW_LINE% '
-
-demo()
