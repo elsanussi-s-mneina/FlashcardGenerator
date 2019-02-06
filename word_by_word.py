@@ -2,6 +2,31 @@ from typing import List, Tuple
 
 from card_separation_tokens import FRONT_BACK_SEPARATOR, BETWEEN_CARD_SEPARATOR
 
+FOCUS_BLANK = '_?_'
+NON_FOCUS_BLANK = '___'
+NEW_LINE_SYMBOL = ' %NEW_LINE% '
+
+
+def print_single_line_text_to_word_by_word_flashcards_csv(text: str):
+    csv_text = convert_text_to_flashcards_as_csv(text)
+    print(csv_text)
+
+
+def convert_text_to_flashcards_as_csv(text: str) -> str:
+    flashcards = convert_single_line_text_to_word_by_word_flashcards(text)
+    csv_text = convert_flashcards_to_csv_text(flashcards)
+    return csv_text
+
+
+def convert_flashcards_to_csv_text(flashcards: List[Tuple[str, str]]) -> str:
+    csv_text = ''
+    for (front_side, back_side) in flashcards:
+        csv_text += front_side
+        csv_text += FRONT_BACK_SEPARATOR
+        csv_text += back_side
+        csv_text += BETWEEN_CARD_SEPARATOR
+    return csv_text
+
 
 def convert_single_line_text_to_word_by_word_flashcards(text: str) -> List[Tuple[str, str]]:
     text = text.replace('\n', NEW_LINE_SYMBOL)
@@ -12,10 +37,6 @@ def convert_single_line_text_to_word_by_word_flashcards(text: str) -> List[Tuple
         if not words[i] == NEW_LINE_SYMBOL.strip():
             front_side, back_side = quiz_on_nth_word(i, words)
             results.append((front_side, back_side))
-            print(front_side, end='')
-            print(FRONT_BACK_SEPARATOR, end='')
-            print(back_side, end='')
-            print(BETWEEN_CARD_SEPARATOR, end='')
         i += 1
     return results
 
@@ -60,8 +81,3 @@ def next_word_is_new_line(words: List[str], index: int) -> bool:
 
 def is_new_line_symbol(token: str) -> bool:
     return token == NEW_LINE_SYMBOL.strip()
-
-
-FOCUS_BLANK = '_?_'
-NON_FOCUS_BLANK = '___'
-NEW_LINE_SYMBOL = ' %NEW_LINE% '

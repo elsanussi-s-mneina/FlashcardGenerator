@@ -21,18 +21,35 @@ options:
 """
 
 from line_by_line import convert_single_line_text_to_line_by_line_flashcards
-from word_by_word import convert_single_line_text_to_word_by_word_flashcards
+from word_by_word import print_single_line_text_to_word_by_word_flashcards_csv
+
+DEMO_INPUT_TEXT = """This is an example sentence,
+in a three line paragraph.
+It is nice outside today.
+"""
 
 
 def demo_word_by_word():
-    convert_single_line_text_to_word_by_word_flashcards("""This is an example sentence,
-in a three line paragraph.
-It is nice outside today.
-""")
+    print('Demonstrating converting text into word-by-word flashcards.')
+    report_demo_text()
+    print('Output:')
+    print_single_line_text_to_word_by_word_flashcards_csv(DEMO_INPUT_TEXT)
+    print('\n\n')
 
 
 def demo_line_by_line():
-    convert_single_line_text_to_line_by_line_flashcards("""This is an example sentence,
-in a three line paragraph.
-It is nice outside today.
-""")
+    print('Demonstrating converting text into line-by-line flashcards.')
+    report_demo_text()
+    print('Output:')
+    convert_single_line_text_to_line_by_line_flashcards(DEMO_INPUT_TEXT)
+    print('\n\n')
+
+
+def report_demo_text():
+    print('The text to be converted is:')
+    print(DEMO_INPUT_TEXT)
+    print()
+
+
+demo_word_by_word()
+demo_line_by_line()
