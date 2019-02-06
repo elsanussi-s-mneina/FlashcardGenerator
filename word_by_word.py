@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-from card_separation_tokens import FRONT_BACK_SEPARATOR, BETWEEN_CARD_SEPARATOR
+from card_separation_tokens import convert_flashcards_to_csv_text
 
 FOCUS_BLANK = '_?_'
 NON_FOCUS_BLANK = '___'
@@ -15,16 +15,6 @@ def print_single_line_text_to_word_by_word_flashcards_csv(text: str):
 def convert_text_to_flashcards_as_csv(text: str) -> str:
     flashcards = convert_single_line_text_to_word_by_word_flashcards(text)
     csv_text = convert_flashcards_to_csv_text(flashcards)
-    return csv_text
-
-
-def convert_flashcards_to_csv_text(flashcards: List[Tuple[str, str]]) -> str:
-    csv_text = ''
-    for (front_side, back_side) in flashcards:
-        csv_text += front_side
-        csv_text += FRONT_BACK_SEPARATOR
-        csv_text += back_side
-        csv_text += BETWEEN_CARD_SEPARATOR
     return csv_text
 
 
