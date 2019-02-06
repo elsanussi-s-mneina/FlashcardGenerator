@@ -1,0 +1,4 @@
+FRONT_BACK_SEPARATOR = '$%$%'
+BETWEEN_CARD_SEPARATOR = '*&*&'
+
+
