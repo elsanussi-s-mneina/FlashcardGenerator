@@ -24,7 +24,7 @@ def convert_single_line_text_to_word_by_word_flashcards(text: str) -> List[Tuple
     i = 0
     results = []
     for word in words:
-        if not words[i] == NEW_LINE_SYMBOL.strip():
+        if not word == NEW_LINE_SYMBOL.strip():
             front_side, back_side = quiz_on_nth_word(i, words)
             results.append((front_side, back_side))
         i += 1
@@ -34,8 +34,7 @@ def convert_single_line_text_to_word_by_word_flashcards(text: str) -> List[Tuple
 def quiz_on_nth_word(n: int, words: List[str]) -> Tuple[str, str]:
     i = 0
     front_side = ''
-    back_side = 'BLANK'
-    previous_word = ''
+    back_side = ''
     for word in words:
         if is_new_line_symbol(word):
             front_side += '\n'
@@ -47,14 +46,13 @@ def quiz_on_nth_word(n: int, words: List[str]) -> Tuple[str, str]:
         else:
             front_side += NON_FOCUS_BLANK + punctuation_at_end_of_word(word) + ' '
         i += 1
-        previous_word = word
     return front_side, back_side
 
 
 def quiz_on_nth_word_show_all_previous_words(n: int, words: List[str]) -> Tuple[str, str]:
     i = 0
     front_side = ''
-    back_side = 'BLANK'
+    back_side = ''
     for word in words:
         if is_new_line_symbol(word):
             front_side += '\n'

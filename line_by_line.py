@@ -24,7 +24,7 @@ def convert_single_line_text_to_line_by_line_flashcards(text: str) -> List[Tuple
     i = 0
     results = []
 
-    for line in lines:
+    for _ in lines:
         front_side, back_side = quiz_on_nth_line(i, lines)
         results.append((front_side, back_side))
         i += 1
