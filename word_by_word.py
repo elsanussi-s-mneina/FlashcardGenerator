@@ -51,6 +51,24 @@ def quiz_on_nth_word(n: int, words: List[str]) -> Tuple[str, str]:
     return front_side, back_side
 
 
+def quiz_on_nth_word_show_all_previous_words(n: int, words: List[str]) -> Tuple[str, str]:
+    i = 0
+    front_side = ''
+    back_side = 'BLANK'
+    for word in words:
+        if is_new_line_symbol(word):
+            front_side += '\n'
+        elif i < n:
+            front_side += word + ' '
+        elif i == n:
+            front_side += FOCUS_BLANK + punctuation_at_end_of_word(word) + ' '
+            back_side = strip_punctuation_on_end(word)
+        else:
+            front_side += NON_FOCUS_BLANK + punctuation_at_end_of_word(word) + ' '
+        i += 1
+    return front_side, back_side
+
+
 def punctuation_at_end_of_word(word: str) -> str:
     if word.endswith('.') or word.endswith(',') or word.endswith('!') or word.endswith('?'):
         return word[-1]
