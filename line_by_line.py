@@ -47,3 +47,8 @@ def quiz_on_nth_line(n: int, lines: List[str], long_version=False) -> Tuple[str,
     front_side = front_side.replace(NEW_DOUBLE_LINE_SYMBOL, '\n')
     back_side = back_side.replace(NEW_DOUBLE_LINE_SYMBOL, '\n')
     return front_side, back_side
+
+
+def custom_blank_line_with_spaces_between_words_shown(line: str):
+    import re
+    return re.sub(r'[a-zA-Z]', '_', line)
