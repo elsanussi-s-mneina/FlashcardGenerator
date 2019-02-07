@@ -7,18 +7,18 @@ LINE_FOCUS_BLANK = '_____?_____'
 LINE_NON_FOCUS_BLANK = '___________'
 
 
-def print_single_line_text_to_line_by_line_flashcards_csv(text: str):
+def print_text_to_line_by_line_flashcards_csv(text: str):
     csv_text = convert_text_to_flashcards_as_csv(text)
     print(csv_text)
 
 
 def convert_text_to_flashcards_as_csv(text: str) -> str:
-    flashcards = convert_single_line_text_to_line_by_line_flashcards(text)
+    flashcards = convert_text_to_line_by_line_flashcards(text)
     csv_text = convert_flashcards_to_csv_text(flashcards)
     return csv_text
 
 
-def convert_single_line_text_to_line_by_line_flashcards(text: str) -> List[Tuple[str, str]]:
+def convert_text_to_line_by_line_flashcards(text: str) -> List[Tuple[str, str]]:
     text = text.replace('\n\n', NEW_DOUBLE_LINE_SYMBOL + '\n')
     lines = text.split('\n')
     i = 0

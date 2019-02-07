@@ -20,8 +20,8 @@ options:
   clue_type: whether the clue is in words, or characters
 """
 
-from line_by_line import convert_single_line_text_to_line_by_line_flashcards
-from word_by_word import print_single_line_text_to_word_by_word_flashcards_csv
+from line_by_line import convert_text_to_line_by_line_flashcards
+from word_by_word import print_text_to_word_by_word_flashcards_csv
 
 DEMO_INPUT_TEXT = """This is an example sentence,
 in a three line paragraph.
@@ -33,7 +33,7 @@ def demo_word_by_word():
     print('Demonstrating converting text into word-by-word flashcards.')
     report_demo_text()
     print('Output:')
-    print_single_line_text_to_word_by_word_flashcards_csv(DEMO_INPUT_TEXT)
+    print_text_to_word_by_word_flashcards_csv(DEMO_INPUT_TEXT)
     print('\n\n')
 
 
@@ -41,7 +41,7 @@ def demo_line_by_line():
     print('Demonstrating converting text into line-by-line flashcards.')
     report_demo_text()
     print('Output:')
-    convert_single_line_text_to_line_by_line_flashcards(DEMO_INPUT_TEXT)
+    convert_text_to_line_by_line_flashcards(DEMO_INPUT_TEXT)
     print('\n\n')
 
 

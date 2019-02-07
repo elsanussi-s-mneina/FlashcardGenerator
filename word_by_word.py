@@ -7,18 +7,18 @@ NON_FOCUS_BLANK = '___'
 NEW_LINE_SYMBOL = ' %NEW_LINE% '
 
 
-def print_single_line_text_to_word_by_word_flashcards_csv(text: str):
+def print_text_to_word_by_word_flashcards_csv(text: str):
     csv_text = convert_text_to_flashcards_as_csv(text)
     print(csv_text)
 
 
 def convert_text_to_flashcards_as_csv(text: str) -> str:
-    flashcards = convert_single_line_text_to_word_by_word_flashcards(text)
+    flashcards = convert_text_to_word_by_word_flashcards(text)
     csv_text = convert_flashcards_to_csv_text(flashcards)
     return csv_text
 
 
-def convert_single_line_text_to_word_by_word_flashcards(text: str) -> List[Tuple[str, str]]:
+def convert_text_to_word_by_word_flashcards(text: str) -> List[Tuple[str, str]]:
     text = text.replace('\n', NEW_LINE_SYMBOL)
     words = text.split()
     i = 0
