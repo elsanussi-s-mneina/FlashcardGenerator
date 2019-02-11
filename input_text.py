@@ -1,4 +1,4 @@
-def read_text_from_file(file_name):
-    file = open('input_data/' + file_name, 'r')
-    lines = file.readlines()
-    return str().join(lines)
+def read_text_from_file(file_name: str) -> str:
+    with open('input_data/' + file_name, 'r') as file:
+        lines = file.readlines()
+        return str().join(lines)
