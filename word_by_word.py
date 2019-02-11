@@ -25,7 +25,7 @@ def convert_text_to_word_by_word_flashcards(text: str) -> List[Tuple[str, str]]:
     results = []
     for word in words:
         if not word == NEW_LINE_SYMBOL.strip():
-            front_side, back_side = quiz_on_nth_word(i, words)
+            front_side, back_side = quiz_on_nth_word_show_all_previous_words(i, words)
             results.append((front_side, back_side))
         i += 1
     return results
