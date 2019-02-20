@@ -10,6 +10,7 @@ def write_text_to_word_by_word_export_file(file_name: str, language: str, conten
 
 
 def _write_text_to_export_file(file_name: str, language: str, contents: str, strategy: str) -> None:
+    make_missing_path('output_data')
     make_missing_paths_for_language(language, strategy)
     with open('output_data/' + language + '/' + strategy + '/' + file_name, 'w') as file:
         file.write(contents)

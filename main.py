@@ -19,9 +19,12 @@ options:
   clue_length: number of words, or characters on the front of the card before the blank
   clue_type: whether the clue is in words, or characters
 """
+import os
 
 from line_by_line import convert_text_to_line_by_line_flashcards
 from word_by_word import print_text_to_word_by_word_flashcards_csv
+from batch_operations import read_text_convert_to_flashcards_and_write_results
+
 
 DEMO_INPUT_TEXT = """This is an example sentence,
 in a three line paragraph.
@@ -51,5 +54,22 @@ def report_demo_text():
     print()
 
 
-demo_word_by_word()
-demo_line_by_line()
+def demo():
+    demo_word_by_word()
+    demo_line_by_line()
+
+
+def main():
+    print('reading all texts for memorization from directory: input_data')
+    languages = os.listdir('input_data')
+    for language in languages:
+        memorization_text_filenames = os.listdir('input_data/' + language)
+        for input_text_filename in memorization_text_filenames:
+            read_text_convert_to_flashcards_and_write_results(language + '/', input_text_filename, language)
+    print('Look in the directory at output_data for CSV files that you can export')
+    print('These files contain the generated flashcards.')
+    print('Program terminated normally.')
+
+
+if __name__ == '__main__':
+    main()
