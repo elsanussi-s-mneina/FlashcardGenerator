@@ -55,4 +55,4 @@ def quiz_on_nth_line(n: int, lines: List[str], long_version=False, blind_blank=T
 
 
 def custom_blank_line_with_spaces_between_words_shown(line: str):
-    return re.sub(r'[a-zA-Z0-9]', '_', line)
+    return re.sub(r'\w', '_', line)
