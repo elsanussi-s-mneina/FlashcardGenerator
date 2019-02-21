@@ -42,9 +42,9 @@ def quiz_on_nth_line(n: int, lines: List[str], long_version=False, blind_blank=T
             front_side += line + '\n'
         elif i == n:
             if blind_blank:
-                front_side += str(i + 1) + ') ' + LINE_FOCUS_BLANK
+                front_side += line_label(i) + LINE_FOCUS_BLANK
             else:
-                front_side += str(i + 1) + ') ' + custom_blank_line_with_spaces_between_words_shown(line)
+                front_side += line_label(i) + custom_blank_line_with_spaces_between_words_shown(line)
             back_side = line
         elif long_version:
             front_side += LINE_NON_FOCUS_BLANK + '\n'
@@ -54,5 +54,22 @@ def quiz_on_nth_line(n: int, lines: List[str], long_version=False, blind_blank=T
     return front_side.rstrip(), back_side.rstrip()
 
 
-def custom_blank_line_with_spaces_between_words_shown(line: str):
+def custom_blank_line_with_spaces_between_words_shown(line: str) -> str:
+    """
+    Replace all alphabetic characters with underscore characters.
+    For example "This thing" would become "____ _____".
+    :param line: a line of text
+    :return: a line of text
+     """
     return re.sub(r'\w', '_', line)
+
+
+def line_label(line_number: int) -> str:
+    """
+    Labels a line with a number. This is useful
+    when a flashcard only contains an excerpt of the
+    full text to be memorized. It allows a hint of context.
+
+    :param line_number: For the first line pass in zero.
+    """
+    return str(line_number + 1) + ') '
