@@ -21,7 +21,7 @@ options:
 """
 import os
 
-from line_by_line import convert_text_to_line_by_line_flashcards
+from line_by_line import LineByLine
 from word_by_word import WordByWord
 from batch_operations import read_text_convert_to_flashcards_and_write_results
 
@@ -45,7 +45,8 @@ def demo_line_by_line():
     print('Demonstrating converting text into line-by-line flashcards.')
     report_demo_text()
     print('Output:')
-    convert_text_to_line_by_line_flashcards(DEMO_INPUT_TEXT)
+    generator = LineByLine()
+    generator.convert_text_to_line_by_line_flashcards(DEMO_INPUT_TEXT)
     print('\n\n')
 
 

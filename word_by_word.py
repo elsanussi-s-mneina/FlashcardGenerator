@@ -53,13 +53,13 @@ class WordByWord:
         """Determine whether a word should be spelled out fully on the front side of a card (instead of being
         covered by some sort of blank, or omitted.
         :param word_index: the index to the word we are asking the question about.
-        :param target_word_index: the index to the word that the flashcard is quizing the student on.
+        :param target_word_index: the index to the word that the flashcard is quizzing the student on.
         :param words: the list of words
         :return: True if the word should appear as-is on the front side of the flashcard.
         """
         return word_index == target_word_index - 1 \
-               or (word_index == target_word_index - 2 and self.is_new_line_symbol(words[word_index + 1]))\
-                    or (self.show_all_previous_words and word_index < target_word_index)
+            or (word_index == target_word_index - 2 and self.is_new_line_symbol(words[word_index + 1]))\
+            or (self.show_all_previous_words and word_index < target_word_index)
 
     @staticmethod
     def punctuation_at_end_of_word(word: str) -> str:

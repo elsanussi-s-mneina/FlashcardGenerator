@@ -44,32 +44,32 @@ class TestWordByWord(unittest.TestCase):
     def test_quiz_on_nth_word__first_word(self):
         generator = WordByWord()
         result = generator.quiz_on_nth_word(0, ['first', 'second', 'third', 'fourth'])
-        expected = ('_?_ ___ ___ ___ ' , 'first')
+        expected = ('_?_ ___ ___ ___ ', 'first')
         self.assertEqual(expected, result)
 
     def test_quiz_on_nth_word__second_word(self):
         generator = WordByWord()
         result = generator.quiz_on_nth_word(1, ['first', 'second', 'third', 'fourth'])
-        expected = ('first _?_ ___ ___ ' , 'second')
+        expected = ('first _?_ ___ ___ ', 'second')
         self.assertEqual(expected, result)
 
     def test_quiz_on_nth_word__fourth_word(self):
         generator = WordByWord()
         generator.configure_to_show_only_one_previous_word_on_front_side()
         result = generator.quiz_on_nth_word(3, ['first', 'second', 'third', 'fourth'])
-        expected = ('___ ___ third _?_ ' , 'fourth')
+        expected = ('___ ___ third _?_ ', 'fourth')
         self.assertEqual(expected, result)
 
     def test_quiz_on_nth_word__fourth_word_again(self):
         generator = WordByWord()
         generator.configure_to_show_only_one_previous_word_on_front_side()
         result = generator.quiz_on_nth_word(3, ['apple', 'banana', 'orange', 'pear'])
-        expected = ('___ ___ orange _?_ ' , 'pear')
+        expected = ('___ ___ orange _?_ ', 'pear')
         self.assertEqual(expected, result)
 
     def test_quiz_on_nth_word_show_all_previous_words__fourth_word_again(self):
         generator = WordByWord()
         generator.configure_to_show_all_previous_words_on_front_side()
         result = generator.quiz_on_nth_word(3, ['apple', 'banana', 'orange', 'pear'])
-        expected = ('apple banana orange _?_ ' , 'pear')
+        expected = ('apple banana orange _?_ ', 'pear')
         self.assertEqual(expected, result)
