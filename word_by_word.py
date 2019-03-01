@@ -39,8 +39,7 @@ class WordByWord:
         for word in words:
             if self.is_new_line_symbol(word):
                 front_side += '\n'
-            elif i == n - 1 or (i == n - 2 and self.is_new_line_symbol(words[i + 1]))\
-                    or (self.show_all_previous_words and i < n):
+            elif self.ought_to_show_word(i, n, words):
                 front_side += word + ' '
             elif i == n:
                 front_side += FOCUS_BLANK + self.punctuation_at_end_of_word(word) + ' '
@@ -49,6 +48,18 @@ class WordByWord:
                 front_side += NON_FOCUS_BLANK + self.punctuation_at_end_of_word(word) + ' '
             i += 1
         return front_side, back_side
+
+    def ought_to_show_word(self, word_index: int, target_word_index: int, words: List[str]) -> bool:
+        """Determine whether a word should be spelled out fully on the front side of a card (instead of being
+        covered by some sort of blank, or omitted.
+        :param word_index: the index to the word we are asking the question about.
+        :param target_word_index: the index to the word that the flashcard is quizing the student on.
+        :param words: the list of words
+        :return: True if the word should appear as-is on the front side of the flashcard.
+        """
+        return word_index == target_word_index - 1 \
+               or (word_index == target_word_index - 2 and self.is_new_line_symbol(words[word_index + 1]))\
+                    or (self.show_all_previous_words and word_index < target_word_index)
 
     @staticmethod
     def punctuation_at_end_of_word(word: str) -> str:
