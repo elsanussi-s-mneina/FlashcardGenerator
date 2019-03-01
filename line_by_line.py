@@ -9,6 +9,7 @@ LINE_NON_FOCUS_BLANK = '___________'
 
 
 def print_text_to_line_by_line_flashcards_csv(text: str, blind_blank=True):
+    """Prints result to the console/terminal."""
     csv_text = convert_text_to_flashcards_as_csv(text, blind_blank=blind_blank)
     print(csv_text)
 
@@ -29,7 +30,6 @@ def convert_text_to_flashcards_as_csv(text: str, blind_blank=True) -> str:
 
 def convert_text_to_line_by_line_flashcards(text: str, blind_blank=True) -> List[Tuple[str, str]]:
     """
-
     :param text: the text the user is trying to memorize.
     :param blind_blank: whether a line is replaced by a single blank instead of a blank per word
     that has the same number of characters as the word's in it or not.
@@ -68,10 +68,7 @@ def quiz_on_nth_line(n: int, lines: List[str], long_version=False, blind_blank=T
         if i == n - 1:
             front_side += line + '\n'
         elif i == n:
-            if blind_blank:
-                front_side += line_label(i) + LINE_FOCUS_BLANK
-            else:
-                front_side += line_label(i) + custom_blank_line_with_spaces_between_words_shown(line)
+            front_side += blank_line(i, line, blind_blank)
             back_side = line
         elif long_version:
             front_side += LINE_NON_FOCUS_BLANK + '\n'
@@ -80,6 +77,14 @@ def quiz_on_nth_line(n: int, lines: List[str], long_version=False, blind_blank=T
     back_side = back_side.replace(NEW_DOUBLE_LINE_SYMBOL, '\n')
     return front_side.rstrip(), back_side.rstrip()
 
+
+def blank_line(i: int, line: str, blind_blank: bool) -> str:
+    result = line_label(i)
+    if blind_blank:
+        result += LINE_FOCUS_BLANK
+    else:
+        result += custom_blank_line_with_spaces_between_words_shown(line)
+    return result
 
 def custom_blank_line_with_spaces_between_words_shown(line: str) -> str:
     """
