@@ -22,7 +22,7 @@ options:
 import os
 
 from line_by_line import convert_text_to_line_by_line_flashcards
-from word_by_word import print_text_to_word_by_word_flashcards_csv
+from word_by_word import WordByWord
 from batch_operations import read_text_convert_to_flashcards_and_write_results
 
 
@@ -36,7 +36,8 @@ def demo_word_by_word():
     print('Demonstrating converting text into word-by-word flashcards.')
     report_demo_text()
     print('Output:')
-    print_text_to_word_by_word_flashcards_csv(DEMO_INPUT_TEXT)
+    word_by_word_generator = WordByWord()
+    word_by_word_generator.print_text_to_word_by_word_flashcards_csv(DEMO_INPUT_TEXT)
     print('\n\n')
 
 
