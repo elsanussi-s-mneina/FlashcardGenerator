@@ -14,12 +14,30 @@ def print_text_to_line_by_line_flashcards_csv(text: str, blind_blank=True):
 
 
 def convert_text_to_flashcards_as_csv(text: str, blind_blank=True) -> str:
+    """
+    :param text: the text to be memorized
+    :param blind_blank: whether a line is replaced by a single blank instead of a blank per word
+    :return: a string representing a deck of flashcards as special separated values. These may be imported
+    by software that supports importing comma-separated values file while setting a different
+    column and row separator.
+    I usually just past this string into Quizlet's import webpage.
+    """
     flashcards = convert_text_to_line_by_line_flashcards(text, blind_blank=blind_blank)
     csv_text = convert_flashcards_to_csv_text(flashcards)
     return csv_text
 
 
 def convert_text_to_line_by_line_flashcards(text: str, blind_blank=True) -> List[Tuple[str, str]]:
+    """
+
+    :param text: the text the user is trying to memorize.
+    :param blind_blank: whether a line is replaced by a single blank instead of a blank per word
+    that has the same number of characters as the word's in it or not.
+    i.e. whether "first second third" is replaced by "_____?_____" or the easier "_?_ _?_ _?_".
+    :return: flashcards. Each flashcard consists of a front side and a back side. The front
+    side contains part of the text with part of it missing, the back side contains the part
+    that the learner needs to recall.
+    """
     text = text.replace('\n\n', NEW_DOUBLE_LINE_SYMBOL + '\n')
     lines = text.split('\n')
     i = 0
@@ -33,6 +51,15 @@ def convert_text_to_line_by_line_flashcards(text: str, blind_blank=True) -> List
 
 
 def quiz_on_nth_line(n: int, lines: List[str], long_version=False, blind_blank=True) -> Tuple[str, str]:
+    """
+    This will return a flashcard for memorizing a single line.
+    :param n: a number that indicates which line is the target of memorization.
+    :param lines: lines of text to be learnt. (the text to be memorized after it is split into lines)
+    :param long_version: whether to include blank lines for the lines that are part of the text
+    but are not currently being memorized and are not part of the hint.
+    :param blind_blank: whether a line is replaced by a single blank instead of a blank per word
+    :return: a single flashcard, that is, a front side and a back side.
+    """
     i = 0
     front_side = ''
     back_side = ''
